@@ -117,35 +117,35 @@ class HashList {
 
     public void removeFirstOccurrence(String key) {
         if (this.head == null) return;
-        if (this.head.getNext() == null && this.head.getKey() != key) return;
-        if (this.head.getKey() == key) {
+        if (this.head.getNext() == null && !this.head.getKey().equals(key)) return;
+        if (this.head.getKey().equals(key)) {
             removeHead();
             return;
         }
         HashNode temp = head;
-        while (temp.getNext().getNext() != null && temp.getKey() != key)
+        while (temp.getNext().getNext() != null && !temp.getKey().equals(key))
             temp = temp.getNext();
-        if (temp.getKey() == key) {
+        if (temp.getKey().equals(key)) {
             temp.getHead().setNext(temp.getNext());
             temp.getNext().setHead(temp.getHead());
             return;
         }
-        if (this.tail.getKey() == key) removeTail();
+        if (this.tail.getKey().equals(key)) removeTail();
     }
 
     public Object returnFirstOccurrence(String key) {
         if (this.head == null) return null;
-        if (this.head.getNext() == null && this.head.getKey() != key) return null;
-        if (this.head.getKey() == key) {
+        if (this.head.getNext() == null && !this.head.getKey().equals(key)) return null;
+        if (this.head.getKey().equals(key)) {
             return this.head.getData();
         }
         HashNode temp = head;
-        while (temp.getNext() != null && temp.getKey() != key)
+        while (temp.getNext() != null && !temp.getKey().equals(key))
             temp = temp.getNext();
-        if (temp.getKey() == key) {
+        if (temp.getKey().equals(key)) {
             return temp.getData();
         }
-        if (this.tail.getKey() == key) return this.tail.getData();
+        if (this.tail.getKey().equals(key)) return this.tail.getData();
         return null;
     }
 
@@ -235,13 +235,13 @@ class HashMap {
 
         hashMap = new HashList[this.arrayLength];
 
-        for (int i = 0; i < oldMap.length; i++) {
-            if (oldMap[i] == null) continue;
-            else if (oldMap[i].getHead() == null) continue;
+        for (HashList hashList : oldMap) {
+            if (hashList == null) continue;
+            else if (hashList.getHead() == null) continue;
 
-            this.put(oldMap[i].getHead().getKey(), oldMap[i].getHead().getData());
+            this.put(hashList.getHead().getKey(), hashList.getHead().getData());
 
-            HashNode temp = oldMap[i].getHead();
+            HashNode temp = hashList.getHead();
             while (temp.getNext() != null) {
                 temp = temp.getNext();
                 this.put(temp.getKey(), temp.getData());
