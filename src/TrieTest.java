@@ -1,6 +1,10 @@
 public class TrieTest {
     public static void main(String[] args) {
-
+        Trie trie = new Trie();
+        trie.insert("testing");
+        System.out.println(trie.search("testing"));
+        System.out.println(trie.search("test"));
+        System.out.println(trie.startsWith("test"));
     }
 }
 
