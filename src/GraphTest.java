@@ -1,22 +1,31 @@
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class GraphTest {
     public static void main(String[] args) {
         Graph graph = new Graph();
 
         graph.addEdge(0, 1);
-        graph.addEdge(1, 2);
-        graph.addEdge(2, 0);
-        graph.addEdge(2, 3);
+        graph.addEdge(0, 4);
+        graph.addEdge(0, 5);
+        graph.addEdge(1, 4);
+        graph.addEdge(1, 3);
+        graph.addEdge(2, 1);
         graph.addEdge(3, 2);
+        graph.addEdge(3, 4);
 
         System.out.println(graph.printGraph());
 
         System.out.println("Nodes/Vertices: " + graph.getVertexCount());
         System.out.println("Edges: " + graph.getEdgeCount());
+        System.out.println();
+
+        System.out.println(graph.BFS(2, 5));
     }
 }
+
 
 class Graph {
     private HashMap<Integer, LinkedList<Integer>> map = new HashMap<>();
@@ -60,5 +69,43 @@ class Graph {
             string.append("\n");
         }
         return string.toString();
+    }
+
+    public String BFS(int vertexOne, int vertexTwo) {
+        if (!this.map.containsKey(vertexOne) || !this.map.containsKey(vertexTwo)) return "No Path";
+        HashMap<Integer, Integer> parents = new HashMap<>();
+        HashSet<Integer> visited = new HashSet();
+        Queue<Integer> toVisit = new LinkedList<>();
+
+
+        toVisit.add(vertexOne);
+
+        while (!toVisit.isEmpty()) {
+            int current = toVisit.remove();
+
+            if (current == vertexTwo) {
+                StringBuilder string = new StringBuilder();
+                string.append(vertexTwo).append(" ");
+                Integer value = vertexTwo;
+                while (value != null && parents.get(value) != null) {
+                    string.append(parents.get(value)).append(" ");
+                    value = parents.get(value);
+                }
+                return "Shortest Path: " + string.reverse().toString().trim();
+            }
+
+            for (int i = 0; i < this.map.get(current).size(); i++) {
+                if (!toVisit.contains(this.map.get(current).get(i)) && !visited.contains(this.map.get(current).get(i))) {
+                    toVisit.add(this.map.get(current).get(i));
+                    parents.put(this.map.get(current).get(i), current);
+                }
+            }
+            visited.add(current);
+        }
+        return "No Path";
+    }
+
+    public boolean DFS() {
+        return false;
     }
 }
