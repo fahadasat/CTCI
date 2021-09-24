@@ -182,15 +182,15 @@ class LinkedList {
 
     @Override
     public String toString() {
-        StringBuilder list = new StringBuilder();
+        StringBuilder list;
 
         if (this.head == null || this.head.getData() == null) return "Empty list.";
 
-        list = new StringBuilder(String.valueOf(this.head.getData()) + " ");
+        list = new StringBuilder(this.head.getData() + " ");
         Node current = this.head;
         while (current.getNext() != null) {
             current = current.getNext();
-            list.append(String.valueOf(current.getData())).append(" ");
+            list.append(current.getData()).append(" ");
         }
 
         return list.toString();

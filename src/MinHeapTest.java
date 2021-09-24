@@ -9,9 +9,9 @@ public class MinHeapTest {
         minHeap.insert(90);
         minHeap.insert(32);
         minHeap.insert(74);
-        minHeap.insert(96);
+        minHeap.insert(2);
         System.out.println(minHeap.extractMin());
-        minHeap.insert(1000);
+        minHeap.insert(10000);
 
     }
 }
