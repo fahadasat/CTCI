@@ -237,7 +237,7 @@
 
   Extract Min/Extract Max: O(log n)
 
-## Heaps
+## Trie
 
 - **Definition**:
 
