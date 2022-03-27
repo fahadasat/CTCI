@@ -9,8 +9,6 @@ var longestPalindrome = function (s) {
     }
 
     let longestSubstring = s.charAt(0);
-    let currentSubstring = "";
-    let currentLetter = "";
 
     for (let i = 0; i < s.length; i++) {
 
@@ -24,7 +22,6 @@ var longestPalindrome = function (s) {
             if (((end + 1) - i) < longestSubstring.length) {
                 break;
             }
-
             if (s.charAt(end) !== s.charAt(i)) {
                 end--;
             } else {
