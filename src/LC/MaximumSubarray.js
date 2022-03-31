@@ -2,6 +2,8 @@
  * @param {number[]} nums
  * @return {number}
  */
+
+//lc: 53
 var maxSubArray = function (nums) {
     let max = -Infinity;
     let current = 0;
@@ -11,7 +13,6 @@ var maxSubArray = function (nums) {
 
         if (current > max) max = current
     }
-
     
     return max;
 };
