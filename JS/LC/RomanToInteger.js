@@ -22,48 +22,86 @@
  * @param {string} s
  * @return {number}
  */
-var romanToInt = function (s) {
+// 13
+var romanToInt = function(s) {
+    let count = 0;
+    let values = {
+        "I": 1,
+        "V": 5,
+        "X": 10,
+        "L": 50,
+        "C": 100,
+        "D": 500,
+        "M": 1000,
+        "IV": 4,
+        "IX": 9,
+        "XL": 40,
+        "XC": 90,
+        "CD": 400,
+        "CM": 900,
+    }
+    let i = 0;
 
-    let number = 0;
-
-    let map = new Map([
-        ['I', 1],
-        ['V', 5],
-        ['X', 10],
-        ['L', 50],
-        ['C', 100],
-        ['D', 500],
-        ['M', 1000],
-    ]);
-
-    for (let i = 0; i < s.length; i++) {
-        try {
-            if (s[i] === "I" && s[i + 1] === "V") {
-                number += 4;
-                i++
-            } else if (s[i] === "I" && s[i + 1] === "X") {
-                number += 9;
-                i++
-            } else if (s[i] === "X" && s[i + 1] === "L") {
-                number += 40;
-                i++
-            } else if (s[i] === "X" && s[i + 1] === "C") {
-                number += 90;
-                i++
-            } else if (s[i] === "C" && s[i + 1] === "D") {
-                number += 400;
-                i++
-            } else if (s[i] === "C" && s[i + 1] === "M") {
-                number += 900;
-                i++
-            } else {
-                number += map.get(s[i]);
-            }
-        } catch (e) {
-            console.log(e)
-            number += map.get(s[i]);
+    while (i < s.length) {
+        if (values[s[i] + s[i+1]]) {
+            count += values[s[i] + s[i+1]];
+            i += 2;
+        } else {
+            count += values[s[i]];
+            i++;
         }
     }
-    return number;
+
+    return count;
 };
-console.log(romanToInt("MCMXCIV"))
+
+
+// /**
+//  * @param {string} s
+//  * @return {number}
+//  */
+// var romanToInt = function (s) {
+//
+//     let number = 0;
+//
+//     let map = new Map([
+//         ['I', 1],
+//         ['V', 5],
+//         ['X', 10],
+//         ['L', 50],
+//         ['C', 100],
+//         ['D', 500],
+//         ['M', 1000],
+//     ]);
+//
+//     for (let i = 0; i < s.length; i++) {
+//         try {
+//             if (s[i] === "I" && s[i + 1] === "V") {
+//                 number += 4;
+//                 i++
+//             } else if (s[i] === "I" && s[i + 1] === "X") {
+//                 number += 9;
+//                 i++
+//             } else if (s[i] === "X" && s[i + 1] === "L") {
+//                 number += 40;
+//                 i++
+//             } else if (s[i] === "X" && s[i + 1] === "C") {
+//                 number += 90;
+//                 i++
+//             } else if (s[i] === "C" && s[i + 1] === "D") {
+//                 number += 400;
+//                 i++
+//             } else if (s[i] === "C" && s[i + 1] === "M") {
+//                 number += 900;
+//                 i++
+//             } else {
+//                 number += map.get(s[i]);
+//             }
+//         } catch (e) {
+//             console.log(e)
+//             number += map.get(s[i]);
+//         }
+//     }
+//     return number;
+// };
+// console.log(romanToInt("MCMXCIV"))
