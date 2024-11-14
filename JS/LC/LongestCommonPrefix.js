@@ -26,6 +26,7 @@
  * @param {string[]} strs
  * @return {string}
  */
+// 14
 var longestCommonPrefix = function (strs) {
 
     let prefix = strs[0];
