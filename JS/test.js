@@ -1,56 +1,74 @@
-class Node {
-    constructor(character) {
-        this.children = [];
-        this.letter = character;
-        this.count = 1;
-    }
+function isNonAlphanumeric(char) {
+    // Regular expression to match non-alphanumeric characters
+    const regex = /[^a-zA-Z0-9]/;
+    return regex.test(char);
 }
 
-class Trie {
-    constructor() {
-        this.letters = []
-    }
-    add(word) {
-        this.addRec(word, 0, this.letters);
-    }
-    addRec(word, index, trie) {
-        if(index >= word.length) {
-            return;
-        }
-        if(trie[word.charCodeAt(index)]) {
-            trie[word.charCodeAt(index)].count += 1;
-        } else {
-            trie[word.charCodeAt(index)] = new Node(word[index]);
-        }
-        this.addRec(word, index + 1, trie[word.charCodeAt(index)].children);
-    }
+// Example usage
+let char1 = '@';
+let char2 = 'A';
+let char3 = '9';
+let char4 = ' ';
+
+console.log(isNonAlphanumeric(char1)); // Output: true
+console.log(isNonAlphanumeric(char2)); // Output: false
+console.log(isNonAlphanumeric(char3)); // Output: false
+console.log(isNonAlphanumeric(char4)); // Output: true
 
 
-}
-
-longestCommonPrefix(["flower","flow","flight"]);
-function longestCommonPrefix  (strs) {
-    let trie = new Trie();
-    for(let i = 0; i < strs.length; i++) {
-        trie.add(strs[i]);
-    }
-    let output = "";
-
-    let current = trie.letters;
-
-    do {
-        current.sort((a, b) => a.count - b.count);
-        console.log(current[0].letter, current[0].count)
-        if(current[0].count > 1) {
-            output += current[0].letter;
-        }
-        current = current[0].children;
-        current.sort((a, b) => b.count - a.count);
-    } while(current[0] != null && current[0].count > 1)
-    // console.log(trie.trie)
-
-    return output;
-}
+// class Node {
+//     constructor(character) {
+//         this.children = [];
+//         this.letter = character;
+//         this.count = 1;
+//     }
+// }
+//
+// class Trie {
+//     constructor() {
+//         this.letters = []
+//     }
+//     add(word) {
+//         this.addRec(word, 0, this.letters);
+//     }
+//     addRec(word, index, trie) {
+//         if(index >= word.length) {
+//             return;
+//         }
+//         if(trie[word.charCodeAt(index)]) {
+//             trie[word.charCodeAt(index)].count += 1;
+//         } else {
+//             trie[word.charCodeAt(index)] = new Node(word[index]);
+//         }
+//         this.addRec(word, index + 1, trie[word.charCodeAt(index)].children);
+//     }
+//
+//
+// }
+//
+// longestCommonPrefix(["flower","flow","flight"]);
+// function longestCommonPrefix  (strs) {
+//     let trie = new Trie();
+//     for(let i = 0; i < strs.length; i++) {
+//         trie.add(strs[i]);
+//     }
+//     let output = "";
+//
+//     let current = trie.letters;
+//
+//     do {
+//         current.sort((a, b) => a.count - b.count);
+//         console.log(current[0].letter, current[0].count)
+//         if(current[0].count > 1) {
+//             output += current[0].letter;
+//         }
+//         current = current[0].children;
+//         current.sort((a, b) => b.count - a.count);
+//     } while(current[0] != null && current[0].count > 1)
+//     // console.log(trie.trie)
+//
+//     return output;
+// }
 
 
 
