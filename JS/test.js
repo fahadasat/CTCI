@@ -1,19 +1,39 @@
-function isNonAlphanumeric(char) {
-    // Regular expression to match non-alphanumeric characters
-    const regex = /[^a-zA-Z0-9]/;
-    return regex.test(char);
+let getLongest = (downtime) => {
+
+    let l = 0;
+    // let r = 0;
+    let result = 0;
+
+    for(let r = 0; r < downtime.length; r++) {
+        if(downtime[r] >= downtime[r+1]) {
+            result = Math.max(result, r - l);
+            l = r;
+        }
+    }
+    result = Math.max(result, downtime.length - 1 - l);
+
+    return result;
 }
 
-// Example usage
-let char1 = '@';
-let char2 = 'A';
-let char3 = '9';
-let char4 = ' ';
+console.log(getLongest([40, 20, 33, 83, 7, 50, 33, 34, 35, 36, 34]));
 
-console.log(isNonAlphanumeric(char1)); // Output: true
-console.log(isNonAlphanumeric(char2)); // Output: false
-console.log(isNonAlphanumeric(char3)); // Output: false
-console.log(isNonAlphanumeric(char4)); // Output: true
+
+// function isNonAlphanumeric(char) {
+//     // Regular expression to match non-alphanumeric characters
+//     const regex = /[^a-zA-Z0-9]/;
+//     return regex.test(char);
+// }
+//
+// // Example usage
+// let char1 = '@';
+// let char2 = 'A';
+// let char3 = '9';
+// let char4 = ' ';
+//
+// console.log(isNonAlphanumeric(char1)); // Output: true
+// console.log(isNonAlphanumeric(char2)); // Output: false
+// console.log(isNonAlphanumeric(char3)); // Output: false
+// console.log(isNonAlphanumeric(char4)); // Output: true
 
 
 // class Node {
